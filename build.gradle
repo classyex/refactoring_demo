@@ -1,0 +1,72 @@
+subprojects {
+    apply plugin: 'java'
+
+    group = 'com.github.classyex.practice.refactoring'
+    version = new Date().format('yyyyMMdd') + '-SNAPSHOT'
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+        options.compilerArgs << "-Xlint:unchecked"
+        options.compilerArgs << "-Xlint:deprecation"
+    }
+
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
+        mavenCentral()
+        jcenter()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+
+    dependencies {
+        implementation("com.google.guava:guava:$guavaVersion")
+        implementation("org.springframework.boot:spring-boot-starter:$springBootVersion")
+        implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+
+        compileOnly("org.projectlombok:lombok:$lombokVersion")
+        annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+
+        runtimeOnly("mysql:mysql-connector-java:$mysqlVersion")
+        testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    apply from: "$rootDir/gradle/config/scripts/style.gradle"
+    apply from: "$rootDir/gradle/config/scripts/coverage.gradle"
+
+    coverage.excludePackages = [
+    ]
+
+    coverage.excludeClasses = [
+    ]
+
+    style.excludePackages = [
+    ]
+
+    style.excludeClasses = [
+    ]
+}
+
+configure(subprojects - project(':chapter1')) {
+    project(':chapter1').dependencies {
+        implementation(project)
+    }
+}
+
+allprojects {
+    apply plugin: 'idea'
+}
+
+apply from: "$rootDir/gradle/config/scripts/idea.gradle"
+
+wrapper {
+    gradleVersion = '6.5'
+}
