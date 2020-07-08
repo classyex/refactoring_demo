@@ -17,9 +17,9 @@ public class PlayTest {
     public void given_plays_string_when_json_format_then_get_value_correct() throws JsonProcessingException {
         String playsStr = "{\"hamlet\":{\"name\":\"Hamlet\",\"type\":\"tragedy\"},\"as-like\":{\"name\":\"As You Like It\",\"type\":\"comedy\"},\"othello\":{\"name\":\"Othello\",\"type\":\"tragedy\"}}";
         JsonNode jsonNode = new ObjectMapper().readTree(playsStr);
-        assertThat(3, is(equalTo(jsonNode.size())));
-        assertThat("As You Like It", is(equalTo(jsonNode.get("as-like").get("name").asText())));
-        assertThat("comedy", is(equalTo(jsonNode.get("as-like").get("type").asText())));
+        assertThat(jsonNode.size(), is(equalTo(3)));
+        assertThat(jsonNode.get("as-like").get("name").asText(), is(equalTo("As You Like It")));
+        assertThat(jsonNode.get("as-like").get("type").asText(), is(equalTo("comedy")));
     }
 
 
