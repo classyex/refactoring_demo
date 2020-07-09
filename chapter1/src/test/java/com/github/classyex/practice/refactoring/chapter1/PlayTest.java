@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -21,17 +19,20 @@ public class PlayTest {
     @Test
     public void given_plays_string_when_json_format_then_get_value_correct() throws JsonProcessingException {
         JsonNode jsonNode = new ObjectMapper().readTree(PLAYS_STR);
-        assertThat(jsonNode.size(), is(equalTo(3)));
-        assertThat(jsonNode.get("as-like").get("name").asText(), is(equalTo("As You Like It")));
-        assertThat(jsonNode.get("as-like").get("type").asText(), is(equalTo("comedy")));
+        assertPlay(jsonNode.size(), jsonNode.get("as-like").get("name").asText(), jsonNode.get("as-like").get("type").asText());
+    }
+
+    private void assertPlay(int size, String name, String type) {
+        assertThat(size, is(equalTo(3)));
+        assertThat(name, is(equalTo("As You Like It")));
+        assertThat(type, is(equalTo("comedy")));
     }
 
     @Test
     public void given_plays_string_when_format_bean_then_correct() throws JsonProcessingException {
-        Map<String, Play> playMap = new ObjectMapper().readValue(PLAYS_STR, new TypeReference<Map<String, Play>>() {});
-        assertThat(playMap.size(), is(equalTo(3)));
-        assertThat(playMap.get("as-like").getName(), is(equalTo("As You Like It")));
-        assertThat(playMap.get("as-like").getType(), is(equalTo("comedy")));
+        Map<String, Play> playMap = new ObjectMapper().readValue(PLAYS_STR, new TypeReference<Map<String, Play>>() {
+        });
+        assertPlay(playMap.size(), playMap.get("as-like").getName(), playMap.get("as-like").getType());
     }
 
 

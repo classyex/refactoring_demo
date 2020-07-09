@@ -1,10 +1,13 @@
 package com.github.classyex.practice.refactoring.chapter1;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,6 +22,8 @@ public class PlayStatementTest {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode plays = objectMapper.readTree(playsStr);
         JsonNode invoices = objectMapper.readTree(invoicesStr);
+        Map<String, Play> playMap = objectMapper.readValue(playsStr, new TypeReference<Map<String, Play>>() {
+        });
         PlayStatement statement = new PlayStatement();
         String expectation = "Statement for BigCo\n" +
                              "  Hamlet: $650.00 (55 seats)\n" +
