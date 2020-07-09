@@ -25,35 +25,49 @@ public class PlayStatement {
 
             switch (play.get("type").asText()) {
                 case "tragedy":
-                    thisAmount = 40000;
-                    if (perf.get("audience").intValue() > 30) {
-                        thisAmount += 1000 * (perf.get("audience").intValue() - 30);
+                    final int tragedyBaseAmount = 40000;
+                    thisAmount = tragedyBaseAmount;
+                    final int tragedyAudienceBase = 30;
+                    if (perf.get("audience").intValue() > tragedyAudienceBase) {
+                        final int tragedyOverPerAmount = 1000;
+                        thisAmount += tragedyOverPerAmount * (perf.get("audience").intValue() - tragedyAudienceBase);
                     }
                     break;
                 case "comedy":
-                    thisAmount = 30000;
-                    if (perf.get("audience").intValue() > 20) {
-                        thisAmount += 10000 + 500 * (perf.get("audience").intValue() - 20);
+                    final int comedyBaseAmount = 30000;
+                    thisAmount = comedyBaseAmount;
+                    final int comedyAudienceBase = 20;
+                    if (perf.get("audience").intValue() > comedyAudienceBase) {
+                        final int comedyOverPerAmount = 500;
+                        final int comedyOverBaseAmount = 10000;
+                        thisAmount += comedyOverBaseAmount + comedyOverPerAmount * (
+                                perf.get("audience").intValue() - comedyAudienceBase);
                     }
-                    thisAmount += 300 * perf.get("audience").intValue();
+                    final int comedyFactory = 300;
+                    thisAmount += comedyFactory * perf.get("audience").intValue();
                     break;
                 default:
                     throw new IllegalArgumentException(String.format("unknown type: %s", play.get("type").asText()));
             }
 
             // add volume credits
-            volumeCredits += Math.max(perf.get("audience").intValue() - 30, 0);
+            final int creditsBase = 30;
+            final int defaultCredits = 0;
+            volumeCredits += Math.max(perf.get("audience").intValue() - creditsBase, defaultCredits);
             // add extra credit for every ten comedy attendees
             if ("comedy".equals(play.get("type").asText())) {
-                volumeCredits += Math.floor(perf.get("audience").intValue() / 5);
+                final float comedyExtraCreditPer = 5.0F;
+                volumeCredits += Math.floor(perf.get("audience").intValue() / comedyExtraCreditPer);
             }
 
             // print line for this order
+            final int formatNum = 100;
             result += String.format("  %s: %s (%s seats)\n", play.get("name").asText(),
-                    format.format(thisAmount / 100), perf.get("audience").intValue());
+                    format.format(thisAmount / formatNum), perf.get("audience").intValue());
             totalAmount += thisAmount;
         }
-        result += String.format("Amount owed is %s\n", format.format(totalAmount / 100));
+        final int formatNum = 100;
+        result += String.format("Amount owed is %s\n", format.format(totalAmount / formatNum));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
     }
