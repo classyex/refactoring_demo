@@ -23,10 +23,13 @@ public class PlayStatement {
 
         int totalAmount = 0;
         for (Performance perf : this.invoice.getPerformances()) {
+            totalAmount += amountFor(perf);
+        }
+
+        for (Performance perf : this.invoice.getPerformances()) {
             // print line for this order
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
                     usd(amountFor(perf)), perf.getAudience());
-            totalAmount += amountFor(perf);
         }
 
         result += String.format("Amount owed is %s\n", usd(totalAmount));
