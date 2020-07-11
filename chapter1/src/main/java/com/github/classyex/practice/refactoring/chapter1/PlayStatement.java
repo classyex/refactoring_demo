@@ -24,13 +24,14 @@ public class PlayStatement {
     public String statement() {
         StatementData statementData = new StatementData();
         statementData.setCustomer(this.invoice.getCustomer());
+        statementData.setPerformances(this.invoice.getPerformances());
         return renderPlainText(statementData);
     }
 
     private String renderPlainText(final StatementData data) {
         String result = String.format("Statement for %s\n", data.getCustomer());
 
-        for (Performance perf : this.invoice.getPerformances()) {
+        for (Performance perf : data.getPerformances()) {
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
                     usd(amountFor(perf)), perf.getAudience());
         }
