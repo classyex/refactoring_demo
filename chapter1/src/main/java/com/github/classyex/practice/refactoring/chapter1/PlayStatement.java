@@ -27,14 +27,19 @@ public class PlayStatement {
             totalAmount += amountFor(perf);
         }
 
-        int volumeCredits = 0;
-        for (Performance perf : invoice.getPerformances()) {
-            volumeCredits += volumeCreditsFor(perf);
-        }
+        int volumeCredits = totalVolumeCredits(invoice);
 
         result += String.format("Amount owed is %s\n", usd(totalAmount));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
+    }
+
+    private int totalVolumeCredits(Invoice invoice) {
+        int volumeCredits = 0;
+        for (Performance perf : invoice.getPerformances()) {
+            volumeCredits += volumeCreditsFor(perf);
+        }
+        return volumeCredits;
     }
 
     private String usd(int aNumber) {
