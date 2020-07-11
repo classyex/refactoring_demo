@@ -3,7 +3,6 @@ package com.github.classyex.practice.refactoring.chapter1;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -31,7 +30,7 @@ public class PlayStatement {
             Performance perf = new Performance();
             perf.setAudience(performance.getAudience());
             perf.setPlayID(performance.getPlayID());
-            perf.setPlay(playFor(performance));
+            perf.setPlays(plays);
             return perf;
         }).collect(Collectors.toList()));
         return renderPlainText();
@@ -41,7 +40,7 @@ public class PlayStatement {
         String result = String.format("Statement for %s\n", statementData.getCustomer());
 
         for (Performance perf : statementData.getPerformances()) {
-            result += String.format("  %s: %s (%s seats)\n", perf.getPlay().getName(),
+            result += String.format("  %s: %s (%s seats)\n", perf.playFor().getName(),
                     usd(amountFor(perf)), perf.getAudience());
         }
 
@@ -78,21 +77,17 @@ public class PlayStatement {
         final int defaultCredits = 0;
         int result = Math.max(aPerformance.getAudience() - creditsBase, defaultCredits);
         // add extra credit for every ten comedy attendees
-        if ("comedy".equals(playFor(aPerformance).getType())) {
+        if ("comedy".equals(aPerformance.playFor().getType())) {
             final float comedyExtraCreditPer = 5.0F;
             result += Math.floor(aPerformance.getAudience() / comedyExtraCreditPer);
         }
         return result;
     }
 
-    private Play playFor(Performance perf) {
-        return this.plays.get(perf.getPlayID());
-    }
-
     private int amountFor(final Performance aPerformance) {
         int result = 0;
 
-        switch (playFor(aPerformance).getType()) {
+        switch (aPerformance.playFor().getType()) {
             case "tragedy":
                 final int tragedyBaseAmount = 40000;
                 result = tragedyBaseAmount;
@@ -116,7 +111,7 @@ public class PlayStatement {
                 result += comedyFactory * aPerformance.getAudience();
                 break;
             default:
-                throw new IllegalArgumentException(String.format("unknown type: %s", playFor(aPerformance).getType()));
+                throw new IllegalArgumentException(String.format("unknown type: %s", aPerformance.playFor().getType()));
         }
         return result;
     }
