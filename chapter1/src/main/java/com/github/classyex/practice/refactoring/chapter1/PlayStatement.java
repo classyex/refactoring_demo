@@ -25,21 +25,21 @@ public class PlayStatement {
             volumeCredits += volumeCreditsFor(perf);
 
             // print line for this order
-            final int formatNum = 100;
+
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
-                    usd(amountFor(perf) / formatNum), perf.getAudience());
+                    usd(amountFor(perf)), perf.getAudience());
             totalAmount += amountFor(perf);
         }
-        final int formatNum = 100;
-        result += String.format("Amount owed is %s\n", usd(totalAmount / formatNum));
+        result += String.format("Amount owed is %s\n", usd(totalAmount));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
     }
 
     private String usd(int aNumber) {
+        final int formatNum = 100;
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
         format.setMinimumFractionDigits(2);
-        return format.format(aNumber);
+        return format.format(aNumber / formatNum);
     }
 
     private int volumeCreditsFor(Performance aPerformance) {
