@@ -31,7 +31,7 @@ public class PlayStatement {
             Performance perf = new Performance();
             perf.setAudience(performance.getAudience());
             perf.setPlayID(performance.getPlayID());
-
+            perf.setPlay(playFor(performance));
             return perf;
         }).collect(Collectors.toList()));
         return renderPlainText(statementData);
@@ -41,7 +41,7 @@ public class PlayStatement {
         String result = String.format("Statement for %s\n", data.getCustomer());
 
         for (Performance perf : data.getPerformances()) {
-            result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
+            result += String.format("  %s: %s (%s seats)\n", perf.getPlay().getName(),
                     usd(amountFor(perf)), perf.getAudience());
         }
 

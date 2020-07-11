@@ -14,5 +14,6 @@ public class Performance {
 
     private String playID;
     private Integer audience;
+    private Play play;
 
 }
