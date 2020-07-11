@@ -22,10 +22,11 @@ public class PlayStatement {
 
 
     public String statement() {
-        return renderPlainText();
+        StatementData statementData = new StatementData();
+        return renderPlainText(statementData);
     }
 
-    private String renderPlainText() {
+    private String renderPlainText(StatementData statementData) {
         String result = String.format("Statement for %s\n", this.invoice.getCustomer());
 
         for (Performance perf : this.invoice.getPerformances()) {
