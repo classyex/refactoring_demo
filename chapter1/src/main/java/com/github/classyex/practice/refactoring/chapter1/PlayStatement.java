@@ -46,35 +46,35 @@ public class PlayStatement {
     }
 
     private int amountFor(final Performance perf, final Play play) {
-        int thisAmount = 0;
+        int result = 0;
 
         switch (play.getType()) {
             case "tragedy":
                 final int tragedyBaseAmount = 40000;
-                thisAmount = tragedyBaseAmount;
+                result = tragedyBaseAmount;
                 final int tragedyAudienceBase = 30;
                 if (perf.getAudience() > tragedyAudienceBase) {
                     final int tragedyOverPerAmount = 1000;
-                    thisAmount += tragedyOverPerAmount * (perf.getAudience() - tragedyAudienceBase);
+                    result += tragedyOverPerAmount * (perf.getAudience() - tragedyAudienceBase);
                 }
                 break;
             case "comedy":
                 final int comedyBaseAmount = 30000;
-                thisAmount = comedyBaseAmount;
+                result = comedyBaseAmount;
                 final int comedyAudienceBase = 20;
                 if (perf.getAudience() > comedyAudienceBase) {
                     final int comedyOverPerAmount = 500;
                     final int comedyOverBaseAmount = 10000;
-                    thisAmount += comedyOverBaseAmount + comedyOverPerAmount * (
+                    result += comedyOverBaseAmount + comedyOverPerAmount * (
                             perf.getAudience() - comedyAudienceBase);
                 }
                 final int comedyFactory = 300;
-                thisAmount += comedyFactory * perf.getAudience();
+                result += comedyFactory * perf.getAudience();
                 break;
             default:
                 throw new IllegalArgumentException(String.format("unknown type: %s", play.getType()));
         }
-        return thisAmount;
+        return result;
     }
 
 }
