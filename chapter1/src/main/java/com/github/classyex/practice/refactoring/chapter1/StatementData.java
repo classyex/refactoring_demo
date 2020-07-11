@@ -13,6 +13,7 @@ public class StatementData {
 
     private String customer;
     private List<Performance> performances;
+    private int totalVolumeCredits;
 
     public String getCustomer() {
         return this.customer;
@@ -29,4 +30,13 @@ public class StatementData {
     public List<Performance> getPerformances() {
         return performances;
     }
+
+    public void setTotalVolumeCredits(int totalVolumeCredits) {
+        this.totalVolumeCredits = totalVolumeCredits;
+    }
+
+    public int getTotalVolumeCredits() {
+        return totalVolumeCredits;
+    }
+
 }
