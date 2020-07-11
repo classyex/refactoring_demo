@@ -27,16 +27,16 @@ public class PlayStatement {
             // print line for this order
             final int formatNum = 100;
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
-                    format(amountFor(perf) / formatNum), perf.getAudience());
+                    usd(amountFor(perf) / formatNum), perf.getAudience());
             totalAmount += amountFor(perf);
         }
         final int formatNum = 100;
-        result += String.format("Amount owed is %s\n", format(totalAmount / formatNum));
+        result += String.format("Amount owed is %s\n", usd(totalAmount / formatNum));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
     }
 
-    private String format(int aNumber) {
+    private String usd(int aNumber) {
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
         format.setMinimumFractionDigits(2);
         return format.format(aNumber);
