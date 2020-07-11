@@ -54,7 +54,7 @@ public class PlayStatement {
     private int amountFor(final Performance aPerformance, final Play play) {
         int result = 0;
 
-        switch (play.getType()) {
+        switch (playFor(aPerformance).getType()) {
             case "tragedy":
                 final int tragedyBaseAmount = 40000;
                 result = tragedyBaseAmount;
@@ -78,7 +78,7 @@ public class PlayStatement {
                 result += comedyFactory * aPerformance.getAudience();
                 break;
             default:
-                throw new IllegalArgumentException(String.format("unknown type: %s", play.getType()));
+                throw new IllegalArgumentException(String.format("unknown type: %s", playFor(aPerformance).getType()));
         }
         return result;
     }
