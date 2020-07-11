@@ -27,12 +27,12 @@ public class PlayStatement {
                     usd(amountFor(perf)), perf.getAudience());
         }
 
-        result += String.format("Amount owed is %s\n", usd(appleSauce()));
+        result += String.format("Amount owed is %s\n", usd(totalAmount()));
         result += String.format("You earned %s credits\n", totalVolumeCredits());
         return result;
     }
 
-    private int appleSauce() {
+    private int totalAmount() {
         int totalAmount = 0;
         for (Performance perf : this.invoice.getPerformances()) {
             totalAmount += amountFor(perf);
