@@ -21,10 +21,7 @@ public class PlayStatement {
 
         String result = String.format("Statement for %s\n", this.invoice.getCustomer());
 
-        int totalAmount = 0;
-        for (Performance perf : this.invoice.getPerformances()) {
-            totalAmount += amountFor(perf);
-        }
+        int totalAmount = appleSauce();
 
         for (Performance perf : this.invoice.getPerformances()) {
             // print line for this order
@@ -35,6 +32,14 @@ public class PlayStatement {
         result += String.format("Amount owed is %s\n", usd(totalAmount));
         result += String.format("You earned %s credits\n", totalVolumeCredits());
         return result;
+    }
+
+    private int appleSauce() {
+        int totalAmount = 0;
+        for (Performance perf : this.invoice.getPerformances()) {
+            totalAmount += amountFor(perf);
+        }
+        return totalAmount;
     }
 
     private int totalVolumeCredits() {
