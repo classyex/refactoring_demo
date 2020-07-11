@@ -33,7 +33,7 @@ public class PlayStatement {
             perf.setPlays(plays);
             return perf;
         }).collect(Collectors.toList()));
-        statementData.setTotalVolumeCredits(totalVolumeCredits());
+        statementData.setTotalVolumeCredits(statementData.totalVolumeCredits());
         statementData.setTotalAmount(statementData.totalAmount());
         return renderPlainText(statementData);
     }
@@ -51,31 +51,11 @@ public class PlayStatement {
         return result;
     }
 
-    private int totalVolumeCredits() {
-        int result = 0;
-        for (Performance perf : statementData.getPerformances()) {
-            result += volumeCreditsFor(perf);
-        }
-        return result;
-    }
-
     private String usd(int aNumber) {
         final int formatNum = 100;
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
         format.setMinimumFractionDigits(2);
         return format.format(aNumber / formatNum);
-    }
-
-    private int volumeCreditsFor(Performance aPerformance) {
-        final int creditsBase = 30;
-        final int defaultCredits = 0;
-        int result = Math.max(aPerformance.getAudience() - creditsBase, defaultCredits);
-        // add extra credit for every ten comedy attendees
-        if ("comedy".equals(aPerformance.playFor().getType())) {
-            final float comedyExtraCreditPer = 5.0F;
-            result += Math.floor(aPerformance.getAudience() / comedyExtraCreditPer);
-        }
-        return result;
     }
 
 }
