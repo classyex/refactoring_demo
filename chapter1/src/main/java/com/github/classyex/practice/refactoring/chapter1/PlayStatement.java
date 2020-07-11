@@ -13,9 +13,11 @@ import java.util.Map;
 public class PlayStatement {
 
     private Map<String, Play> plays;
+    private Invoice invoice;
 
     public String statement(final Map<String, Play> plays, final Invoice invoice) {
         this.plays = plays;
+        this.invoice = invoice;
 
         int totalAmount = 0;
         String result = String.format("Statement for %s\n", invoice.getCustomer());
@@ -27,16 +29,16 @@ public class PlayStatement {
             totalAmount += amountFor(perf);
         }
 
-        int volumeCredits = totalVolumeCredits(invoice);
+        int volumeCredits = totalVolumeCredits();
 
         result += String.format("Amount owed is %s\n", usd(totalAmount));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
     }
 
-    private int totalVolumeCredits(Invoice invoice) {
+    private int totalVolumeCredits() {
         int volumeCredits = 0;
-        for (Performance perf : invoice.getPerformances()) {
+        for (Performance perf : this.invoice.getPerformances()) {
             volumeCredits += volumeCreditsFor(perf);
         }
         return volumeCredits;
