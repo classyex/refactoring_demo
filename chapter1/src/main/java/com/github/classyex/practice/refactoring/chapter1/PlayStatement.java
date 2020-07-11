@@ -12,9 +12,12 @@ import java.util.Map;
 */
 public class PlayStatement {
 
+    private Map<String, Play> plays;
+
     public String statement(final Map<String, Play> plays, final Invoice invoice) {
         int totalAmount = 0;
         int volumeCredits = 0;
+        this.plays = plays;
         String result = String.format("Statement for %s\n", invoice.getCustomer());
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
         format.setMinimumFractionDigits(2);
