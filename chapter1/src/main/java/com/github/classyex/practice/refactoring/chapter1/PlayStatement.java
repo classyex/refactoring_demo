@@ -23,21 +23,21 @@ public class PlayStatement {
         format.setMinimumFractionDigits(2);
 
         for (Performance perf : invoice.getPerformances()) {
-            int thisAmount = amountFor(perf, playFor(plays, perf));
+            int thisAmount = amountFor(perf, playFor(perf));
 
             // add volume credits
             final int creditsBase = 30;
             final int defaultCredits = 0;
             volumeCredits += Math.max(perf.getAudience() - creditsBase, defaultCredits);
             // add extra credit for every ten comedy attendees
-            if ("comedy".equals(playFor(plays, perf).getType())) {
+            if ("comedy".equals(playFor(perf).getType())) {
                 final float comedyExtraCreditPer = 5.0F;
                 volumeCredits += Math.floor(perf.getAudience() / comedyExtraCreditPer);
             }
 
             // print line for this order
             final int formatNum = 100;
-            result += String.format("  %s: %s (%s seats)\n", playFor(plays, perf).getName(),
+            result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
                     format.format(thisAmount / formatNum), perf.getAudience());
             totalAmount += thisAmount;
         }
@@ -47,8 +47,8 @@ public class PlayStatement {
         return result;
     }
 
-    private Play playFor(Map<String, Play> plays, Performance perf) {
-        return plays.get(perf.getPlayID());
+    private Play playFor(Performance perf) {
+        return this.plays.get(perf.getPlayID());
     }
 
     private int amountFor(final Performance aPerformance, final Play play) {
