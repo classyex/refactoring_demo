@@ -15,6 +15,16 @@ public class PlayStatement {
     private Map<String, Play> plays;
     private Invoice invoice;
 
+    public PlayStatement() {
+
+    }
+
+    public PlayStatement(final Map<String, Play> plays, final Invoice invoice) {
+        this.plays = plays;
+        this.invoice = invoice;
+    }
+
+
     public String statement(final Map<String, Play> plays, final Invoice invoice) {
         this.plays = plays;
         this.invoice = invoice;
