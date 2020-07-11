@@ -8,4 +8,14 @@ package com.github.classyex.practice.refactoring.chapter1;
 */
 
 public class StatementData {
+
+    private String customer;
+
+    public String getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
 }
