@@ -41,13 +41,13 @@ public class PlayStatement {
     private int volumeCreditsFor(Performance perf) {
         final int creditsBase = 30;
         final int defaultCredits = 0;
-        int volumeCredits = Math.max(perf.getAudience() - creditsBase, defaultCredits);
+        int result = Math.max(perf.getAudience() - creditsBase, defaultCredits);
         // add extra credit for every ten comedy attendees
         if ("comedy".equals(playFor(perf).getType())) {
             final float comedyExtraCreditPer = 5.0F;
-            volumeCredits += Math.floor(perf.getAudience() / comedyExtraCreditPer);
+            result += Math.floor(perf.getAudience() / comedyExtraCreditPer);
         }
-        return volumeCredits;
+        return result;
     }
 
     private Play playFor(Performance perf) {
