@@ -21,15 +21,13 @@ public class PlayStatement {
 
         String result = String.format("Statement for %s\n", this.invoice.getCustomer());
 
-        int totalAmount = appleSauce();
-
         for (Performance perf : this.invoice.getPerformances()) {
             // print line for this order
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
                     usd(amountFor(perf)), perf.getAudience());
         }
 
-        result += String.format("Amount owed is %s\n", usd(totalAmount));
+        result += String.format("Amount owed is %s\n", usd(appleSauce()));
         result += String.format("You earned %s credits\n", totalVolumeCredits());
         return result;
     }
