@@ -22,6 +22,10 @@ public class PlayStatement {
 
 
     public String statement() {
+        return renderPlainText();
+    }
+
+    private String renderPlainText() {
         String result = String.format("Statement for %s\n", this.invoice.getCustomer());
 
         for (Performance perf : this.invoice.getPerformances()) {
