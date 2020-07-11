@@ -19,9 +19,9 @@ public class PlayStatement {
         this.plays = plays;
         this.invoice = invoice;
 
-        int totalAmount = 0;
         String result = String.format("Statement for %s\n", this.invoice.getCustomer());
 
+        int totalAmount = 0;
         for (Performance perf : this.invoice.getPerformances()) {
             // print line for this order
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
