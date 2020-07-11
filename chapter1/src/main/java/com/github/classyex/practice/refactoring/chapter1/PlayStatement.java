@@ -33,11 +33,11 @@ public class PlayStatement {
     }
 
     private int totalAmount() {
-        int totalAmount = 0;
+        int result = 0;
         for (Performance perf : this.invoice.getPerformances()) {
-            totalAmount += amountFor(perf);
+            result += amountFor(perf);
         }
-        return totalAmount;
+        return result;
     }
 
     private int totalVolumeCredits() {
