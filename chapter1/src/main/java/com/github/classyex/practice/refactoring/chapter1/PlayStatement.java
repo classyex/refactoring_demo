@@ -3,6 +3,8 @@ package com.github.classyex.practice.refactoring.chapter1;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
 * PlayStatement.java <br>
@@ -25,7 +27,13 @@ public class PlayStatement {
     public String statement() {
         statementData = new StatementData();
         statementData.setCustomer(this.invoice.getCustomer());
-        statementData.setPerformances(this.invoice.getPerformances());
+        statementData.setPerformances(this.invoice.getPerformances().stream().map(performance -> {
+            Performance perf = new Performance();
+            perf.setAudience(performance.getAudience());
+            perf.setPlayID(performance.getPlayID());
+
+            return perf;
+        }).collect(Collectors.toList()));
         return renderPlainText(statementData);
     }
 
