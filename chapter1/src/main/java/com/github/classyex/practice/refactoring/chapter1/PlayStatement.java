@@ -34,13 +34,13 @@ public class PlayStatement {
             perf.setPlay(playFor(performance));
             return perf;
         }).collect(Collectors.toList()));
-        return renderPlainText(statementData);
+        return renderPlainText();
     }
 
-    private String renderPlainText(final StatementData data) {
-        String result = String.format("Statement for %s\n", data.getCustomer());
+    private String renderPlainText() {
+        String result = String.format("Statement for %s\n", statementData.getCustomer());
 
-        for (Performance perf : data.getPerformances()) {
+        for (Performance perf : statementData.getPerformances()) {
             result += String.format("  %s: %s (%s seats)\n", perf.getPlay().getName(),
                     usd(amountFor(perf)), perf.getAudience());
         }
