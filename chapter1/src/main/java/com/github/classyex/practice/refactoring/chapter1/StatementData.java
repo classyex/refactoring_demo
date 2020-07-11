@@ -14,6 +14,7 @@ public class StatementData {
     private String customer;
     private List<Performance> performances;
     private int totalVolumeCredits;
+    private int totalAmount;
 
     public String getCustomer() {
         return this.customer;
@@ -39,4 +40,11 @@ public class StatementData {
         return totalVolumeCredits;
     }
 
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
+    }
 }
