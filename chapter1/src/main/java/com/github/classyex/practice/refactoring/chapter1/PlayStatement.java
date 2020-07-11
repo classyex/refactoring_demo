@@ -19,8 +19,6 @@ public class PlayStatement {
         int volumeCredits = 0;
         this.plays = plays;
         String result = String.format("Statement for %s\n", invoice.getCustomer());
-        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
-        format.setMinimumFractionDigits(2);
 
         for (Performance perf : invoice.getPerformances()) {
 
@@ -29,13 +27,19 @@ public class PlayStatement {
             // print line for this order
             final int formatNum = 100;
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
-                    format.format(amountFor(perf) / formatNum), perf.getAudience());
+                    format(amountFor(perf) / formatNum), perf.getAudience());
             totalAmount += amountFor(perf);
         }
         final int formatNum = 100;
-        result += String.format("Amount owed is %s\n", format.format(totalAmount / formatNum));
+        result += String.format("Amount owed is %s\n", format(totalAmount / formatNum));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
+    }
+
+    private String format(int aNumber) {
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+        format.setMinimumFractionDigits(2);
+        return format.format(aNumber);
     }
 
     private int volumeCreditsFor(Performance aPerformance) {
