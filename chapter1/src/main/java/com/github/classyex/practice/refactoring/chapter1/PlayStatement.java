@@ -12,8 +12,8 @@ import java.util.Map;
 */
 public class PlayStatement {
 
-    private Map<String, Play> plays;
-    private Invoice invoice;
+    private final Map<String, Play> plays;
+    private final Invoice invoice;
 
     public PlayStatement(final Map<String, Play> plays, final Invoice invoice) {
         this.plays = plays;
