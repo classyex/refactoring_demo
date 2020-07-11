@@ -20,7 +20,7 @@ public class PlayStatement {
         format.setMinimumFractionDigits(2);
 
         for (Performance perf : invoice.getPerformances()) {
-            Play play = plays.get(perf.getPlayID());
+            Play play = playFor(plays, perf);
             int thisAmount = amountFor(perf, play);
 
             // add volume credits
@@ -43,6 +43,10 @@ public class PlayStatement {
         result += String.format("Amount owed is %s\n", format.format(totalAmount / formatNum));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
+    }
+
+    private Play playFor(Map<String, Play> plays, Performance perf) {
+        return plays.get(perf.getPlayID());
     }
 
     private int amountFor(final Performance aPerformance, final Play play) {
