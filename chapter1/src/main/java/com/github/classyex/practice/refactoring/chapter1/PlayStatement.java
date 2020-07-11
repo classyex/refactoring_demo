@@ -29,10 +29,8 @@ public class PlayStatement {
             totalAmount += amountFor(perf);
         }
 
-        int volumeCredits = totalVolumeCredits();
-
         result += String.format("Amount owed is %s\n", usd(totalAmount));
-        result += String.format("You earned %s credits\n", volumeCredits);
+        result += String.format("You earned %s credits\n", totalVolumeCredits());
         return result;
     }
 
