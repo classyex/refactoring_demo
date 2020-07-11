@@ -41,7 +41,7 @@ public class PlayStatement {
 
         for (Performance perf : statementData.getPerformances()) {
             result += String.format("  %s: %s (%s seats)\n", perf.playFor().getName(),
-                    usd(amountFor(perf)), perf.getAudience());
+                    usd(perf.amountFor()), perf.getAudience());
         }
 
         result += String.format("Amount owed is %s\n", usd(totalAmount()));
@@ -52,7 +52,7 @@ public class PlayStatement {
     private int totalAmount() {
         int result = 0;
         for (Performance perf : statementData.getPerformances()) {
-            result += amountFor(perf);
+            result += perf.amountFor();
         }
         return result;
     }
@@ -80,38 +80,6 @@ public class PlayStatement {
         if ("comedy".equals(aPerformance.playFor().getType())) {
             final float comedyExtraCreditPer = 5.0F;
             result += Math.floor(aPerformance.getAudience() / comedyExtraCreditPer);
-        }
-        return result;
-    }
-
-    private int amountFor(final Performance aPerformance) {
-        int result = 0;
-
-        switch (aPerformance.playFor().getType()) {
-            case "tragedy":
-                final int tragedyBaseAmount = 40000;
-                result = tragedyBaseAmount;
-                final int tragedyAudienceBase = 30;
-                if (aPerformance.getAudience() > tragedyAudienceBase) {
-                    final int tragedyOverPerAmount = 1000;
-                    result += tragedyOverPerAmount * (aPerformance.getAudience() - tragedyAudienceBase);
-                }
-                break;
-            case "comedy":
-                final int comedyBaseAmount = 30000;
-                result = comedyBaseAmount;
-                final int comedyAudienceBase = 20;
-                if (aPerformance.getAudience() > comedyAudienceBase) {
-                    final int comedyOverPerAmount = 500;
-                    final int comedyOverBaseAmount = 10000;
-                    result += comedyOverBaseAmount + comedyOverPerAmount * (
-                            aPerformance.getAudience() - comedyAudienceBase);
-                }
-                final int comedyFactory = 300;
-                result += comedyFactory * aPerformance.getAudience();
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("unknown type: %s", aPerformance.playFor().getType()));
         }
         return result;
     }
