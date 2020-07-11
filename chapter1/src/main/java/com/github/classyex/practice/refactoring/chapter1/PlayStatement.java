@@ -21,15 +21,16 @@ public class PlayStatement {
         String result = String.format("Statement for %s\n", invoice.getCustomer());
 
         for (Performance perf : invoice.getPerformances()) {
-
-            volumeCredits += volumeCreditsFor(perf);
-
             // print line for this order
-
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
                     usd(amountFor(perf)), perf.getAudience());
             totalAmount += amountFor(perf);
         }
+
+        for (Performance perf : invoice.getPerformances()) {
+            volumeCredits += volumeCreditsFor(perf);
+        }
+
         result += String.format("Amount owed is %s\n", usd(totalAmount));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
