@@ -15,9 +15,9 @@ public class PlayStatement {
     private Map<String, Play> plays;
 
     public String statement(final Map<String, Play> plays, final Invoice invoice) {
-        int totalAmount = 0;
-        int volumeCredits = 0;
         this.plays = plays;
+
+        int totalAmount = 0;
         String result = String.format("Statement for %s\n", invoice.getCustomer());
 
         for (Performance perf : invoice.getPerformances()) {
@@ -27,6 +27,7 @@ public class PlayStatement {
             totalAmount += amountFor(perf);
         }
 
+        int volumeCredits = 0;
         for (Performance perf : invoice.getPerformances()) {
             volumeCredits += volumeCreditsFor(perf);
         }
