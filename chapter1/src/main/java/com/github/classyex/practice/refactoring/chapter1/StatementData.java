@@ -13,7 +13,6 @@ public class StatementData {
 
     private String customer;
     private List<Performance> performances;
-    private int totalAmount;
 
     public String getCustomer() {
         return this.customer;
@@ -31,13 +30,6 @@ public class StatementData {
         return performances;
     }
 
-    public void setTotalAmount(int totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public int getTotalAmount() {
-        return totalAmount;
-    }
 
     int totalAmount() {
         int result = 0;
