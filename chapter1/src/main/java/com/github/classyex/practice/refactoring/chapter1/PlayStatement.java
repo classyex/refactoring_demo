@@ -33,7 +33,6 @@ public class PlayStatement {
             perf.setPlays(plays);
             return perf;
         }).collect(Collectors.toList()));
-        statementData.setTotalVolumeCredits(statementData.totalVolumeCredits());
         statementData.setTotalAmount(statementData.totalAmount());
         return renderPlainText(statementData);
     }
@@ -47,7 +46,7 @@ public class PlayStatement {
         }
 
         result += String.format("Amount owed is %s\n", usd(statementData.getTotalAmount()));
-        result += String.format("You earned %s credits\n", statementData.getTotalVolumeCredits());
+        result += String.format("You earned %s credits\n", statementData.totalVolumeCredits());
         return result;
     }
 
