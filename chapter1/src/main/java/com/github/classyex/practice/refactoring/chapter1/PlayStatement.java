@@ -23,7 +23,7 @@ public class PlayStatement {
         format.setMinimumFractionDigits(2);
 
         for (Performance perf : invoice.getPerformances()) {
-            int thisAmount = amountFor(perf, playFor(perf));
+            int thisAmount = amountFor(perf);
 
             // add volume credits
             final int creditsBase = 30;
@@ -51,7 +51,7 @@ public class PlayStatement {
         return this.plays.get(perf.getPlayID());
     }
 
-    private int amountFor(final Performance aPerformance, final Play play) {
+    private int amountFor(final Performance aPerformance) {
         int result = 0;
 
         switch (playFor(aPerformance).getType()) {
