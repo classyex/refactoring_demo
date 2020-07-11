@@ -20,22 +20,21 @@ public class PlayStatement {
         format.setMinimumFractionDigits(2);
 
         for (Performance perf : invoice.getPerformances()) {
-            Play play = playFor(plays, perf);
-            int thisAmount = amountFor(perf, play);
+            int thisAmount = amountFor(perf, playFor(plays, perf));
 
             // add volume credits
             final int creditsBase = 30;
             final int defaultCredits = 0;
             volumeCredits += Math.max(perf.getAudience() - creditsBase, defaultCredits);
             // add extra credit for every ten comedy attendees
-            if ("comedy".equals(play.getType())) {
+            if ("comedy".equals(playFor(plays, perf).getType())) {
                 final float comedyExtraCreditPer = 5.0F;
                 volumeCredits += Math.floor(perf.getAudience() / comedyExtraCreditPer);
             }
 
             // print line for this order
             final int formatNum = 100;
-            result += String.format("  %s: %s (%s seats)\n", play.getName(),
+            result += String.format("  %s: %s (%s seats)\n", playFor(plays, perf).getName(),
                     format.format(thisAmount / formatNum), perf.getAudience());
             totalAmount += thisAmount;
         }
