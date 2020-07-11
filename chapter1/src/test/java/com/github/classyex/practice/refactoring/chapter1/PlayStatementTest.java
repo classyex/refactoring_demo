@@ -32,7 +32,7 @@ public class PlayStatementTest {
                 "  Othello: $500.00 (40 seats)\n" +
                 "Amount owed is $1,730.00\n" +
                 "You earned 47 credits\n";
-        assertThat(statement.statement(playMap, invoicesList.get(0)), is(equalTo(expectation)));
+        assertThat(statement.statement(), is(equalTo(expectation)));
     }
 
 
@@ -52,7 +52,7 @@ public class PlayStatementTest {
                 "  Othello: $500.00 (40 seats)\n" +
                 "Amount owed is $1,257.00\n" +
                 "You earned 13 credits\n";
-        assertThat(statement.statement(playMap, invoicesList.get(0)), is(equalTo(expectation)));
+        assertThat(statement.statement(), is(equalTo(expectation)));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class PlayStatementTest {
         PlayStatement statement = new PlayStatement(playMap, invoicesList.get(0));
 
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class,
-                () -> statement.statement(playMap, invoicesList.get(0)));
+                () -> statement.statement());
         assertThat(exception.getMessage(), is(equalTo("unknown type: action")));
 
     }

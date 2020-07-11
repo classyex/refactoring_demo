@@ -21,10 +21,7 @@ public class PlayStatement {
     }
 
 
-    public String statement(final Map<String, Play> plays, final Invoice invoice) {
-        this.plays = plays;
-        this.invoice = invoice;
-
+    public String statement() {
         String result = String.format("Statement for %s\n", this.invoice.getCustomer());
 
         for (Performance perf : this.invoice.getPerformances()) {
