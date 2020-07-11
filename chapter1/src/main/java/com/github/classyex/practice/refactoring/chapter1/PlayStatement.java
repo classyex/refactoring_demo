@@ -35,10 +35,10 @@ public class PlayStatement {
         }).collect(Collectors.toList()));
         statementData.setTotalVolumeCredits(totalVolumeCredits());
         statementData.setTotalAmount(totalAmount());
-        return renderPlainText();
+        return renderPlainText(statementData);
     }
 
-    private String renderPlainText() {
+    private String renderPlainText(StatementData statementData) {
         String result = String.format("Statement for %s\n", statementData.getCustomer());
 
         for (Performance perf : statementData.getPerformances()) {
