@@ -21,34 +21,7 @@ public class PlayStatement {
 
         for (Performance perf : invoice.getPerformances()) {
             Play play = plays.get(perf.getPlayID());
-            int thisAmount = 0;
-
-            switch (play.getType()) {
-                case "tragedy":
-                    final int tragedyBaseAmount = 40000;
-                    thisAmount = tragedyBaseAmount;
-                    final int tragedyAudienceBase = 30;
-                    if (perf.getAudience() > tragedyAudienceBase) {
-                        final int tragedyOverPerAmount = 1000;
-                        thisAmount += tragedyOverPerAmount * (perf.getAudience() - tragedyAudienceBase);
-                    }
-                    break;
-                case "comedy":
-                    final int comedyBaseAmount = 30000;
-                    thisAmount = comedyBaseAmount;
-                    final int comedyAudienceBase = 20;
-                    if (perf.getAudience() > comedyAudienceBase) {
-                        final int comedyOverPerAmount = 500;
-                        final int comedyOverBaseAmount = 10000;
-                        thisAmount += comedyOverBaseAmount + comedyOverPerAmount * (
-                                perf.getAudience() - comedyAudienceBase);
-                    }
-                    final int comedyFactory = 300;
-                    thisAmount += comedyFactory * perf.getAudience();
-                    break;
-                default:
-                    throw new IllegalArgumentException(String.format("unknown type: %s", play.getType()));
-            }
+            int thisAmount = amountFor(perf, play);
 
             // add volume credits
             final int creditsBase = 30;
@@ -70,6 +43,38 @@ public class PlayStatement {
         result += String.format("Amount owed is %s\n", format.format(totalAmount / formatNum));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
+    }
+
+    private int amountFor(final Performance perf, final Play play) {
+        int thisAmount = 0;
+
+        switch (play.getType()) {
+            case "tragedy":
+                final int tragedyBaseAmount = 40000;
+                thisAmount = tragedyBaseAmount;
+                final int tragedyAudienceBase = 30;
+                if (perf.getAudience() > tragedyAudienceBase) {
+                    final int tragedyOverPerAmount = 1000;
+                    thisAmount += tragedyOverPerAmount * (perf.getAudience() - tragedyAudienceBase);
+                }
+                break;
+            case "comedy":
+                final int comedyBaseAmount = 30000;
+                thisAmount = comedyBaseAmount;
+                final int comedyAudienceBase = 20;
+                if (perf.getAudience() > comedyAudienceBase) {
+                    final int comedyOverPerAmount = 500;
+                    final int comedyOverBaseAmount = 10000;
+                    thisAmount += comedyOverBaseAmount + comedyOverPerAmount * (
+                            perf.getAudience() - comedyAudienceBase);
+                }
+                final int comedyFactory = 300;
+                thisAmount += comedyFactory * perf.getAudience();
+                break;
+            default:
+                throw new IllegalArgumentException(String.format("unknown type: %s", play.getType()));
+        }
+        return thisAmount;
     }
 
 }
