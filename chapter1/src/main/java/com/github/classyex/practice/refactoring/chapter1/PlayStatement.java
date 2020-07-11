@@ -41,11 +41,11 @@ public class PlayStatement {
     }
 
     private int totalVolumeCredits() {
-        int volumeCredits = 0;
+        int result = 0;
         for (Performance perf : this.invoice.getPerformances()) {
-            volumeCredits += volumeCreditsFor(perf);
+            result += volumeCreditsFor(perf);
         }
-        return volumeCredits;
+        return result;
     }
 
     private String usd(int aNumber) {
