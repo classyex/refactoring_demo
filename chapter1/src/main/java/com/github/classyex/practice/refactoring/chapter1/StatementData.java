@@ -47,4 +47,12 @@ public class StatementData {
     public int getTotalAmount() {
         return totalAmount;
     }
+
+    int totalAmount() {
+        int result = 0;
+        for (Performance perf : getPerformances()) {
+            result += perf.amountFor();
+        }
+        return result;
+    }
 }
