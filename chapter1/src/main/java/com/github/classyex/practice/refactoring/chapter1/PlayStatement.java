@@ -23,7 +23,6 @@ public class PlayStatement {
         format.setMinimumFractionDigits(2);
 
         for (Performance perf : invoice.getPerformances()) {
-            int thisAmount = amountFor(perf);
 
             // add volume credits
             final int creditsBase = 30;
@@ -38,8 +37,8 @@ public class PlayStatement {
             // print line for this order
             final int formatNum = 100;
             result += String.format("  %s: %s (%s seats)\n", playFor(perf).getName(),
-                    format.format(thisAmount / formatNum), perf.getAudience());
-            totalAmount += thisAmount;
+                    format.format(amountFor(perf) / formatNum), perf.getAudience());
+            totalAmount += amountFor(perf);
         }
         final int formatNum = 100;
         result += String.format("Amount owed is %s\n", format.format(totalAmount / formatNum));
