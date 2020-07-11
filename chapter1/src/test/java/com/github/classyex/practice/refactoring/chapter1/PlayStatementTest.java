@@ -45,7 +45,7 @@ public class PlayStatementTest {
         });
         List<Invoice> invoicesList = objectMapper.readValue(invoicesStr, new TypeReference<List<Invoice>>() {
         });
-        PlayStatement statement = new PlayStatement();
+        PlayStatement statement = new PlayStatement(playMap, invoicesList.get(0));
         String expectation = "Statement for BigCo\n" +
                 "  Hamlet: $400.00 (29 seats)\n" +
                 "  As You Like It: $357.00 (19 seats)\n" +
@@ -64,7 +64,7 @@ public class PlayStatementTest {
         });
         List<Invoice> invoicesList = objectMapper.readValue(invoicesStr, new TypeReference<List<Invoice>>() {
         });
-        PlayStatement statement = new PlayStatement();
+        PlayStatement statement = new PlayStatement(playMap, invoicesList.get(0));
 
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> statement.statement(playMap, invoicesList.get(0)));
