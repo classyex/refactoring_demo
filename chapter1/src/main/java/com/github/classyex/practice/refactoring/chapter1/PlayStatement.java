@@ -24,15 +24,7 @@ public class PlayStatement {
 
         for (Performance perf : invoice.getPerformances()) {
 
-            // add volume credits
-            final int creditsBase = 30;
-            final int defaultCredits = 0;
-            volumeCredits += Math.max(perf.getAudience() - creditsBase, defaultCredits);
-            // add extra credit for every ten comedy attendees
-            if ("comedy".equals(playFor(perf).getType())) {
-                final float comedyExtraCreditPer = 5.0F;
-                volumeCredits += Math.floor(perf.getAudience() / comedyExtraCreditPer);
-            }
+            volumeCredits += volumeCreditsFor(perf);
 
             // print line for this order
             final int formatNum = 100;
@@ -44,6 +36,18 @@ public class PlayStatement {
         result += String.format("Amount owed is %s\n", format.format(totalAmount / formatNum));
         result += String.format("You earned %s credits\n", volumeCredits);
         return result;
+    }
+
+    private int volumeCreditsFor(Performance perf) {
+        final int creditsBase = 30;
+        final int defaultCredits = 0;
+        int volumeCredits = Math.max(perf.getAudience() - creditsBase, defaultCredits);
+        // add extra credit for every ten comedy attendees
+        if ("comedy".equals(playFor(perf).getType())) {
+            final float comedyExtraCreditPer = 5.0F;
+            volumeCredits += Math.floor(perf.getAudience() / comedyExtraCreditPer);
+        }
+        return volumeCredits;
     }
 
     private Play playFor(Performance perf) {
