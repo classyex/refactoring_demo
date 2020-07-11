@@ -14,6 +14,7 @@ public class PlayStatement {
 
     private final Map<String, Play> plays;
     private final Invoice invoice;
+    private StatementData statementData;
 
     public PlayStatement(final Map<String, Play> plays, final Invoice invoice) {
         this.plays = plays;
@@ -22,7 +23,7 @@ public class PlayStatement {
 
 
     public String statement() {
-        StatementData statementData = new StatementData();
+        statementData = new StatementData();
         statementData.setCustomer(this.invoice.getCustomer());
         statementData.setPerformances(this.invoice.getPerformances());
         return renderPlainText(statementData);
@@ -43,7 +44,7 @@ public class PlayStatement {
 
     private int totalAmount() {
         int result = 0;
-        for (Performance perf : this.invoice.getPerformances()) {
+        for (Performance perf : statementData.getPerformances()) {
             result += amountFor(perf);
         }
         return result;
@@ -51,7 +52,7 @@ public class PlayStatement {
 
     private int totalVolumeCredits() {
         int result = 0;
-        for (Performance perf : this.invoice.getPerformances()) {
+        for (Performance perf : statementData.getPerformances()) {
             result += volumeCreditsFor(perf);
         }
         return result;
