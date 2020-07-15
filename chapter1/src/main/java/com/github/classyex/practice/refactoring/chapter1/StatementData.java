@@ -35,6 +35,7 @@ public class StatementData {
         BeanUtils.copyProperties(aPerformance, result);
         result.setPlay(playFor(aPerformance));
         result.setAmount(amountFor(aPerformance));
+        result.setVolumeCredits(volumeCreditsFor(aPerformance));
         return result;
     }
 
