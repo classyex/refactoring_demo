@@ -18,13 +18,17 @@ public class StatementData {
 
     public StatementData(Invoice invoice, Map<String, Play> plays) {
         this.customer = invoice.getCustomer();
-        this.performances = invoice.getPerformances().stream().map(performance -> {
-            Performance perf = new Performance();
-            perf.setAudience(performance.getAudience());
-            perf.setPlayID(performance.getPlayID());
-            perf.setPlays(plays);
-            return perf;
-        }).collect(Collectors.toList());
+        this.performances = invoice.getPerformances().stream()
+                .map(performance -> enrichPerformance(plays, performance))
+                .collect(Collectors.toList());
+    }
+
+    private Performance enrichPerformance(Map<String, Play> plays, Performance performance) {
+        Performance perf = new Performance();
+        perf.setAudience(performance.getAudience());
+        perf.setPlayID(performance.getPlayID());
+        perf.setPlays(plays);
+        return perf;
     }
 
     public String getCustomer() {
