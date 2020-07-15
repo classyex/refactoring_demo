@@ -60,10 +60,6 @@ public class StatementData {
         return plays.get(aPerformance.getPlayID());
     }
 
-    int amountFor(final RichPerformance aPerformance) {
-        return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amountFor();
-    }
-
     private int volumeCreditsFor(final Performance aPerformance) {
         final int creditsBase = 30;
         final int defaultCredits = 0;
