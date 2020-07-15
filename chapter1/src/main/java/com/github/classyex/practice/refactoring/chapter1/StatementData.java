@@ -24,11 +24,11 @@ public class StatementData {
     }
 
     private Performance enrichPerformance(Map<String, Play> plays, Performance performance) {
-        Performance perf = new Performance();
-        perf.setAudience(performance.getAudience());
-        perf.setPlayID(performance.getPlayID());
-        perf.setPlays(plays);
-        return perf;
+        Performance result = new Performance();
+        result.setAudience(performance.getAudience());
+        result.setPlayID(performance.getPlayID());
+        result.setPlays(plays);
+        return result;
     }
 
     public String getCustomer() {
