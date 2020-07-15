@@ -35,18 +35,9 @@ public class StatementData {
         return this.customer;
     }
 
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
-    public void setPerformances(List<Performance> performances) {
-        this.performances = performances;
-    }
-
     public List<Performance> getPerformances() {
         return performances;
     }
-
 
     int totalAmount() {
         return getPerformances().stream().map(Performance::amountFor).reduce(0, Integer::sum);
