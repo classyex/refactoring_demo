@@ -33,11 +33,22 @@ public class StatementData {
     private RichPerformance enrichPerformance(final Performance aPerformance) {
         RichPerformance result = new RichPerformance();
         BeanUtils.copyProperties(aPerformance, result);
-        PerformanceCalculator calculator = new PerformanceCalculator(result, playFor(result));
+        PerformanceCalculator calculator = createPerformanceCalculator(result, playFor(result));
         result.setPlay(calculator.getPlay());
         result.setAmount(calculator.amountFor());
         result.setVolumeCredits(calculator.volumeCreditsFor());
         return result;
+    }
+
+    private PerformanceCalculator createPerformanceCalculator(RichPerformance aPerformance, Play aPlay) {
+        switch (aPlay.getType()) {
+            case "tragedy":
+                return new TragedyPerformanceCalculator(aPerformance, aPlay);
+            case "comedy":
+                return new ComedyPerformanceCalculator(aPerformance, aPlay);
+            default:
+                throw new IllegalArgumentException(String.format("unknown type: %s", aPlay.getType()));
+        }
     }
 
     public String getCustomer() {
