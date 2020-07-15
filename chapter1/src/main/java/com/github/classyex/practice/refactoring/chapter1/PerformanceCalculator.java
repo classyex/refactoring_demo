@@ -9,7 +9,15 @@ package com.github.classyex.practice.refactoring.chapter1;
 
 public class PerformanceCalculator {
 
-    public PerformanceCalculator(final Performance aPerformance) {
+    private Performance performance;
+    private Play play;
 
+    public PerformanceCalculator(final Performance aPerformance, final Play play) {
+        this.performance = aPerformance;
+        this.play = play;
+    }
+
+    public Play getPlay() {
+        return play;
     }
 }
