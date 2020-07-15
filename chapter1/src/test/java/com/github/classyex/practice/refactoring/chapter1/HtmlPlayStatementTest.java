@@ -3,6 +3,7 @@ package com.github.classyex.practice.refactoring.chapter1;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -36,5 +37,21 @@ public class HtmlPlayStatementTest {
         assertThat(statement.htmlStatement(), is(equalTo(expectation)));
     }
 
+    @Test
+    public void given_unknown_type_when_statement_then_error() throws JsonProcessingException {
+        String playsStr = "{\"hamlet\":{\"name\":\"Hamlet\",\"type\":\"action\"},\"as-like\":{\"name\":\"As You Like It\",\"type\":\"comedy\"},\"othello\":{\"name\":\"Othello\",\"type\":\"tragedy\"}}";
+        String invoicesStr = "[{\"customer\":\"BigCo\",\"performances\":[{\"playID\":\"hamlet\",\"audience\":29},{\"playID\":\"as-like\",\"audience\":19},{\"playID\":\"othello\",\"audience\":40}]}]";
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Play> playMap = objectMapper.readValue(playsStr, new TypeReference<Map<String, Play>>() {
+        });
+        List<Invoice> invoicesList = objectMapper.readValue(invoicesStr, new TypeReference<List<Invoice>>() {
+        });
+        PlayStatement statement = new PlayStatement(playMap, invoicesList.get(0));
+
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class,
+                () -> statement.htmlStatement());
+        assertThat(exception.getMessage(), is(equalTo("unknown type: action")));
+
+    }
 
 }
