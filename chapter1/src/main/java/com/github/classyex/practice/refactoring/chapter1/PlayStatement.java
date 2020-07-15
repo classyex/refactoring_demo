@@ -23,20 +23,7 @@ public class PlayStatement {
 
 
     public String statement() {
-        return renderPlainText(createStatementData(invoice, plays));
-    }
-
-    private StatementData createStatementData(Invoice invoice, Map<String, Play> plays) {
-        StatementData statementData = new StatementData();
-        statementData.setCustomer(invoice.getCustomer());
-        statementData.setPerformances(invoice.getPerformances().stream().map(performance -> {
-            Performance perf = new Performance();
-            perf.setAudience(performance.getAudience());
-            perf.setPlayID(performance.getPlayID());
-            perf.setPlays(plays);
-            return perf;
-        }).collect(Collectors.toList()));
-        return statementData;
+        return renderPlainText(new StatementData(invoice, plays));
     }
 
     private String renderPlainText(StatementData statementData) {

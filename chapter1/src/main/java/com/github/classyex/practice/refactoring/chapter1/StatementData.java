@@ -1,6 +1,8 @@
 package com.github.classyex.practice.refactoring.chapter1;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
 * StateData.java <br>
@@ -13,6 +15,17 @@ public class StatementData {
 
     private String customer;
     private List<Performance> performances;
+
+    public StatementData(Invoice invoice, Map<String, Play> plays) {
+        this.customer = invoice.getCustomer();
+        this.performances = invoice.getPerformances().stream().map(performance -> {
+            Performance perf = new Performance();
+            perf.setAudience(performance.getAudience());
+            perf.setPlayID(performance.getPlayID());
+            perf.setPlays(plays);
+            return perf;
+        }).collect(Collectors.toList());
+    }
 
     public String getCustomer() {
         return this.customer;
