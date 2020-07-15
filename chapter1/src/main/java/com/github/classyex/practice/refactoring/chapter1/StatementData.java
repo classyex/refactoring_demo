@@ -2,7 +2,6 @@ package com.github.classyex.practice.refactoring.chapter1;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
 * StateData.java <br>
@@ -20,13 +19,7 @@ public class StatementData {
     public StatementData(final Invoice invoice, final Map<String, Play> plays) {
         this.customer = invoice.getCustomer();
         this.plays = plays;
-        this.performances = invoice.getPerformances().stream()
-                .map(performance -> enrichPerformance(performance))
-                .collect(Collectors.toList());
-    }
-
-    private Performance enrichPerformance(final Performance aPerformance) {
-        return new Performance(aPerformance.getPlayID(), aPerformance.getAudience());
+        this.performances = invoice.getPerformances();
     }
 
     public String getCustomer() {
