@@ -1,7 +1,10 @@
 package com.github.classyex.practice.refactoring.chapter1;
 
+import org.springframework.beans.BeanUtils;
+
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
 * StateData.java <br>
@@ -14,19 +17,30 @@ public class StatementData {
 
     private String customer;
     private Map<String, Play> plays;
-    private List<Performance> performances;
+    private List<RichPerformance> performances;
+    private Integer totalAmount;
+    private Integer totalVolumeCredits;
 
     public StatementData(final Invoice invoice, final Map<String, Play> plays) {
         this.customer = invoice.getCustomer();
         this.plays = plays;
-        this.performances = invoice.getPerformances();
+        this.performances = invoice.getPerformances().stream()
+                .map(this::enrichPerformance).collect(Collectors.toList());
+        this.totalAmount = totalAmount();
+        this.totalVolumeCredits = totalVolumeCredits();
+    }
+
+    private RichPerformance enrichPerformance(Performance aPerformance) {
+        RichPerformance result = new RichPerformance();
+        BeanUtils.copyProperties(aPerformance, result);
+        return result;
     }
 
     public String getCustomer() {
         return this.customer;
     }
 
-    public List<Performance> getPerformances() {
+    public List<RichPerformance> getPerformances() {
         return performances;
     }
 
