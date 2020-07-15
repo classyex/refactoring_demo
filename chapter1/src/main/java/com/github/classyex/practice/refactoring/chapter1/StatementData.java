@@ -33,9 +33,9 @@ public class StatementData {
     private RichPerformance enrichPerformance(final Performance aPerformance) {
         RichPerformance result = new RichPerformance();
         BeanUtils.copyProperties(aPerformance, result);
-        result.setPlay(playFor(aPerformance));
-        result.setAmount(amountFor(aPerformance));
-        result.setVolumeCredits(volumeCreditsFor(aPerformance));
+        result.setPlay(playFor(result));
+        result.setAmount(amountFor(result));
+        result.setVolumeCredits(volumeCreditsFor(result));
         return result;
     }
 
@@ -59,10 +59,10 @@ public class StatementData {
         return plays.get(aPerformance.getPlayID());
     }
 
-    int amountFor(final Performance aPerformance) {
+    int amountFor(final RichPerformance aPerformance) {
         int result = 0;
 
-        switch (playFor(aPerformance).getType()) {
+        switch (aPerformance.getPlay().getType()) {
             case "tragedy":
                 final int tragedyBaseAmount = 40000;
                 result = tragedyBaseAmount;
@@ -86,7 +86,7 @@ public class StatementData {
                 result += comedyFactory * aPerformance.getAudience();
                 break;
             default:
-                throw new IllegalArgumentException(String.format("unknown type: %s", playFor(aPerformance).getType()));
+                throw new IllegalArgumentException(String.format("unknown type: %s", aPerformance.getPlay().getType()));
         }
         return result;
     }
