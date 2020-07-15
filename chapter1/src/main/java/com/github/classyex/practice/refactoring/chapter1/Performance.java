@@ -16,7 +16,7 @@ public class Performance {
         return playID;
     }
 
-    public void setPlayID(String playID) {
+    public void setPlayID(final String playID) {
         this.playID = playID;
     }
 
@@ -24,7 +24,7 @@ public class Performance {
         return audience;
     }
 
-    public void setAudience(Integer audience) {
+    public void setAudience(final Integer audience) {
         this.audience = audience;
     }
 }
