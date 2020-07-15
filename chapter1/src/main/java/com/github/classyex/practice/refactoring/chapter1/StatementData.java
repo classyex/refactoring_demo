@@ -56,4 +56,37 @@ public class StatementData {
         }
         return result;
     }
+
+    int amountFor(Performance aPerformance) {
+        int result = 0;
+
+        switch (aPerformance.playFor().getType()) {
+            case "tragedy":
+                final int tragedyBaseAmount = 40000;
+                result = tragedyBaseAmount;
+                final int tragedyAudienceBase = 30;
+                if (aPerformance.getAudience() > tragedyAudienceBase) {
+                    final int tragedyOverPerAmount = 1000;
+                    result += tragedyOverPerAmount * (aPerformance.getAudience() - tragedyAudienceBase);
+                }
+                break;
+            case "comedy":
+                final int comedyBaseAmount = 30000;
+                result = comedyBaseAmount;
+                final int comedyAudienceBase = 20;
+                if (aPerformance.getAudience() > comedyAudienceBase) {
+                    final int comedyOverPerAmount = 500;
+                    final int comedyOverBaseAmount = 10000;
+                    result += comedyOverBaseAmount + comedyOverPerAmount * (
+                            aPerformance.getAudience() - comedyAudienceBase);
+                }
+                final int comedyFactory = 300;
+                result += comedyFactory * aPerformance.getAudience();
+                break;
+            default:
+                throw new IllegalArgumentException(String.format("unknown type: %s", aPerformance.playFor().getType()));
+        }
+        return result;
+    }
+
 }
