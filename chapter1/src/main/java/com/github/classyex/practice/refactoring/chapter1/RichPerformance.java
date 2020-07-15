@@ -8,4 +8,14 @@ package com.github.classyex.practice.refactoring.chapter1;
 */
 
 public class RichPerformance extends Performance {
+
+    private Play play;
+
+    public Play getPlay() {
+        return play;
+    }
+
+    public void setPlay(Play play) {
+        this.play = play;
+    }
 }

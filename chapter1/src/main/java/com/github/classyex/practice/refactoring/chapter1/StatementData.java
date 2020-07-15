@@ -33,6 +33,8 @@ public class StatementData {
     private RichPerformance enrichPerformance(final Performance aPerformance) {
         RichPerformance result = new RichPerformance();
         BeanUtils.copyProperties(aPerformance, result);
+        result.setPlay(playFor(aPerformance));
+        
         return result;
     }
 
@@ -42,6 +44,14 @@ public class StatementData {
 
     public List<RichPerformance> getPerformances() {
         return performances;
+    }
+
+    public Integer getTotalAmount() {
+        return totalAmount;
+    }
+
+    public Integer getTotalVolumeCredits() {
+        return totalVolumeCredits;
     }
 
     Play playFor(final Performance aPerformance) {
