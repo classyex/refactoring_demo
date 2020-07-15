@@ -17,7 +17,7 @@ public class Performance {
     public Performance() {
     }
 
-    public Performance(final String playID, final Integer audience, final Map<String, Play> plays) {
+    public Performance(final String playID, final Integer audience) {
         this.playID = playID;
         this.audience = audience;
     }

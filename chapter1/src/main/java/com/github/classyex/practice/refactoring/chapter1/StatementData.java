@@ -26,7 +26,7 @@ public class StatementData {
     }
 
     private Performance enrichPerformance(final Performance aPerformance) {
-        return new Performance(aPerformance.getPlayID(), aPerformance.getAudience(), plays);
+        return new Performance(aPerformance.getPlayID(), aPerformance.getAudience());
     }
 
     public String getCustomer() {
