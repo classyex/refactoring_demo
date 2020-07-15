@@ -61,35 +61,7 @@ public class StatementData {
     }
 
     int amountFor(final RichPerformance aPerformance) {
-        int result = 0;
-
-        switch (aPerformance.getPlay().getType()) {
-            case "tragedy":
-                final int tragedyBaseAmount = 40000;
-                result = tragedyBaseAmount;
-                final int tragedyAudienceBase = 30;
-                if (aPerformance.getAudience() > tragedyAudienceBase) {
-                    final int tragedyOverPerAmount = 1000;
-                    result += tragedyOverPerAmount * (aPerformance.getAudience() - tragedyAudienceBase);
-                }
-                break;
-            case "comedy":
-                final int comedyBaseAmount = 30000;
-                result = comedyBaseAmount;
-                final int comedyAudienceBase = 20;
-                if (aPerformance.getAudience() > comedyAudienceBase) {
-                    final int comedyOverPerAmount = 500;
-                    final int comedyOverBaseAmount = 10000;
-                    result += comedyOverBaseAmount + comedyOverPerAmount * (
-                            aPerformance.getAudience() - comedyAudienceBase);
-                }
-                final int comedyFactory = 300;
-                result += comedyFactory * aPerformance.getAudience();
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("unknown type: %s", aPerformance.getPlay().getType()));
-        }
-        return result;
+        return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amountFor();
     }
 
     private int volumeCreditsFor(final Performance aPerformance) {
