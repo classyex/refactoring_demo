@@ -46,9 +46,9 @@ public class PlayStatement {
         String result = String.format("<h1>Statement for %s</h1>\n", statementData.getCustomer());
         result += "<table>\n";
         result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>\n";
-        for (Performance perf : statementData.getPerformances()) {
+        for (RichPerformance perf : statementData.getPerformances()) {
             result += String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>\n",
-                    statementData.playFor(perf).getName(), perf.getAudience(), usd(statementData.amountFor(perf)));
+                    perf.getPlay().getName(), perf.getAudience(), usd(statementData.amountFor(perf)));
         }
         result += "</table>\n";
         result += String.format("<p>Amount owed is <em>%s</em></p>\n", usd(statementData.getTotalAmount()));
