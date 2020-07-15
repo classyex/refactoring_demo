@@ -35,7 +35,7 @@ public class StatementData {
         BeanUtils.copyProperties(aPerformance, result);
         PerformanceCalculator calculator = new PerformanceCalculator(result, playFor(result));
         result.setPlay(calculator.getPlay());
-        result.setAmount(amountFor(result));
+        result.setAmount(calculator.amountFor());
         result.setVolumeCredits(volumeCreditsFor(result));
         return result;
     }
