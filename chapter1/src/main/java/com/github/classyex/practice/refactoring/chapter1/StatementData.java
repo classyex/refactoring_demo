@@ -89,4 +89,8 @@ public class StatementData {
         return result;
     }
 
+    Play playFor(Performance aPerformance) {
+        return plays.get(aPerformance.getPlayID());
+    }
+
 }
