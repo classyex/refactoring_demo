@@ -3,7 +3,6 @@ package com.github.classyex.practice.refactoring.chapter1;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
 * PlayStatement.java <br>
