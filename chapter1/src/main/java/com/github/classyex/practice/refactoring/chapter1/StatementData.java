@@ -77,7 +77,7 @@ public class StatementData {
     }
 
     int totalAmount() {
-        return getPerformances().stream().map(this::amountFor).reduce(0, Integer::sum);
+        return getPerformances().stream().map(RichPerformance::getAmount).reduce(0, Integer::sum);
     }
 
     int totalVolumeCredits() {

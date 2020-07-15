@@ -30,7 +30,7 @@ public class PlayStatement {
 
         for (RichPerformance perf : statementData.getPerformances()) {
             result += String.format("  %s: %s (%s seats)\n", perf.getPlay().getName(),
-                    usd(statementData.amountFor(perf)), perf.getAudience());
+                    usd(perf.getAmount()), perf.getAudience());
         }
 
         result += String.format("Amount owed is %s\n", usd(statementData.getTotalAmount()));
@@ -48,7 +48,7 @@ public class PlayStatement {
         result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>\n";
         for (RichPerformance perf : statementData.getPerformances()) {
             result += String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>\n",
-                    perf.getPlay().getName(), perf.getAudience(), usd(statementData.amountFor(perf)));
+                    perf.getPlay().getName(), perf.getAudience(), usd(perf.getAmount()));
         }
         result += "</table>\n";
         result += String.format("<p>Amount owed is <em>%s</em></p>\n", usd(statementData.getTotalAmount()));
