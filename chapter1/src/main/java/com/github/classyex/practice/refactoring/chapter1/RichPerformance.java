@@ -34,7 +34,7 @@ public class RichPerformance extends Performance {
         return volumeCredits;
     }
 
-    public void setVolumeCredits(Integer volumeCredits) {
+    public void setVolumeCredits(final Integer volumeCredits) {
         this.volumeCredits = volumeCredits;
     }
 }
