@@ -14,16 +14,18 @@ import java.util.stream.Collectors;
 public class StatementData {
 
     private String customer;
+    private Map<String, Play> plays;
     private List<Performance> performances;
 
     public StatementData(final Invoice invoice, final Map<String, Play> plays) {
         this.customer = invoice.getCustomer();
+        this.plays = plays;
         this.performances = invoice.getPerformances().stream()
-                .map(performance -> enrichPerformance(plays, performance))
+                .map(performance -> enrichPerformance(performance))
                 .collect(Collectors.toList());
     }
 
-    private Performance enrichPerformance(final Map<String, Play> plays, final Performance aPerformance) {
+    private Performance enrichPerformance(final Performance aPerformance) {
         return new Performance(aPerformance.getPlayID(), aPerformance.getAudience(), plays);
     }
 
