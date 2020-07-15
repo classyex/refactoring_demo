@@ -57,7 +57,7 @@ public class StatementData {
         return result;
     }
 
-    int amountFor(Performance aPerformance) {
+    int amountFor(final Performance aPerformance) {
         int result = 0;
 
         switch (playFor(aPerformance).getType()) {
@@ -89,7 +89,7 @@ public class StatementData {
         return result;
     }
 
-    Play playFor(Performance aPerformance) {
+    Play playFor(final Performance aPerformance) {
         return plays.get(aPerformance.getPlayID());
     }
 

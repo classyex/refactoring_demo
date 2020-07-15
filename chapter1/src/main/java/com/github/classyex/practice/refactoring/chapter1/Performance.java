@@ -1,7 +1,5 @@
 package com.github.classyex.practice.refactoring.chapter1;
 
-import java.util.Map;
-
 /**
 * Performance.java <br>
 * @version 1.0 <br>

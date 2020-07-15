@@ -1,7 +1,5 @@
 package com.github.classyex.practice.refactoring.chapter1;
 
-import lombok.Data;
-
 import java.util.List;
 
 /**
@@ -10,10 +8,25 @@ import java.util.List;
 * @date 2020/7/9 15:14 <br>
 * @author yex <br>
 */
-@Data
+
 public class Invoice {
 
     private String customer;
     private List<Performance> performances;
 
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(final String customer) {
+        this.customer = customer;
+    }
+
+    public List<Performance> getPerformances() {
+        return performances;
+    }
+
+    public void setPerformances(final List<Performance> performances) {
+        this.performances = performances;
+    }
 }
