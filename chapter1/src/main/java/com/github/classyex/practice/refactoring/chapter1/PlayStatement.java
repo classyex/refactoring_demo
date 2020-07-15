@@ -24,16 +24,20 @@ public class PlayStatement {
 
 
     public String statement() {
-        statementData = new StatementData();
-        statementData.setCustomer(this.invoice.getCustomer());
-        statementData.setPerformances(this.invoice.getPerformances().stream().map(performance -> {
+        return renderPlainText(createStatementData(invoice, plays));
+    }
+
+    private StatementData createStatementData(Invoice invoice, Map<String, Play> plays) {
+        StatementData statementData = new StatementData();
+        statementData.setCustomer(invoice.getCustomer());
+        statementData.setPerformances(invoice.getPerformances().stream().map(performance -> {
             Performance perf = new Performance();
             perf.setAudience(performance.getAudience());
             perf.setPlayID(performance.getPlayID());
             perf.setPlays(plays);
             return perf;
         }).collect(Collectors.toList()));
-        return renderPlainText(statementData);
+        return statementData;
     }
 
     private String renderPlainText(StatementData statementData) {
