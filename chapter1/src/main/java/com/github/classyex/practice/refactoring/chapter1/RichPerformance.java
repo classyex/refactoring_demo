@@ -11,6 +11,17 @@ public class RichPerformance extends Performance {
 
     private Play play;
 
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    private Integer amount;
+
+
     public Play getPlay() {
         return play;
     }

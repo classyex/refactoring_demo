@@ -34,7 +34,7 @@ public class StatementData {
         RichPerformance result = new RichPerformance();
         BeanUtils.copyProperties(aPerformance, result);
         result.setPlay(playFor(aPerformance));
-        
+        result.setAmount(amountFor(aPerformance));
         return result;
     }
 
