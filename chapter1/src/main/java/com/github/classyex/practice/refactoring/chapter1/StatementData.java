@@ -23,10 +23,10 @@ public class StatementData {
                 .collect(Collectors.toList());
     }
 
-    private Performance enrichPerformance(Map<String, Play> plays, Performance performance) {
+    private Performance enrichPerformance(Map<String, Play> plays, Performance aPerformance) {
         Performance result = new Performance();
-        result.setAudience(performance.getAudience());
-        result.setPlayID(performance.getPlayID());
+        result.setAudience(aPerformance.getAudience());
+        result.setPlayID(aPerformance.getPlayID());
         result.setPlays(plays);
         return result;
     }
