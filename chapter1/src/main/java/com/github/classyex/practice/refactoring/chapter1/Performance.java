@@ -22,7 +22,7 @@ public class Performance {
         return this.plays.get(getPlayID());
     }
 
-    public void setPlays(Map<String, Play> plays) {
+    public void setPlays(final Map<String, Play> plays) {
         this.plays = plays;
     }
 

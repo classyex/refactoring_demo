@@ -25,7 +25,7 @@ public class PlayStatement {
         return renderPlainText(new StatementData(invoice, plays));
     }
 
-    private String renderPlainText(StatementData statementData) {
+    private String renderPlainText(final StatementData statementData) {
         String result = String.format("Statement for %s\n", statementData.getCustomer());
 
         for (Performance perf : statementData.getPerformances()) {
@@ -42,7 +42,7 @@ public class PlayStatement {
         return renderHtml(new StatementData(invoice, plays));
     }
 
-    private String renderHtml(StatementData statementData) {
+    private String renderHtml(final StatementData statementData) {
         String result = String.format("<h1>Statement for %s</h1>\n", statementData.getCustomer());
         result += "<table>\n";
         result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>\n";
@@ -56,7 +56,7 @@ public class PlayStatement {
         return result;
     }
 
-    private String usd(int aNumber) {
+    private String usd(final int aNumber) {
         final int formatNum = 100;
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
         format.setMinimumFractionDigits(2);

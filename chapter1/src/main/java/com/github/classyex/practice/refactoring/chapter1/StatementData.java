@@ -16,14 +16,14 @@ public class StatementData {
     private String customer;
     private List<Performance> performances;
 
-    public StatementData(Invoice invoice, Map<String, Play> plays) {
+    public StatementData(final Invoice invoice, final Map<String, Play> plays) {
         this.customer = invoice.getCustomer();
         this.performances = invoice.getPerformances().stream()
                 .map(performance -> enrichPerformance(plays, performance))
                 .collect(Collectors.toList());
     }
 
-    private Performance enrichPerformance(Map<String, Play> plays, Performance aPerformance) {
+    private Performance enrichPerformance(final Map<String, Play> plays, final Performance aPerformance) {
         Performance result = new Performance();
         result.setAudience(aPerformance.getAudience());
         result.setPlayID(aPerformance.getPlayID());
@@ -56,7 +56,7 @@ public class StatementData {
         return getPerformances().stream().map(this::volumeCreditsFor).reduce(0, Integer::sum);
     }
 
-    private int volumeCreditsFor(Performance aPerformance) {
+    private int volumeCreditsFor(final Performance aPerformance) {
         final int creditsBase = 30;
         final int defaultCredits = 0;
         int result = Math.max(aPerformance.getAudience() - creditsBase, defaultCredits);
