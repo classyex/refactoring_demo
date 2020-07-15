@@ -8,7 +8,25 @@ package com.github.classyex.practice.refactoring.chapter1;
 */
 
 public class TragedyPerformanceCalculator extends PerformanceCalculator {
+
+    private RichPerformance performance;
+    private Play play;
+
     public TragedyPerformanceCalculator(RichPerformance aPerformance, Play aPlay) {
         super(aPerformance, aPlay);
+        performance = aPerformance;
+        play = aPlay;
     }
+
+    @Override
+    int amountFor() {
+        int result = 40000;
+        final int tragedyAudienceBase = 30;
+        if (performance.getAudience() > tragedyAudienceBase) {
+            final int tragedyOverPerAmount = 1000;
+            result += tragedyOverPerAmount * (performance.getAudience() - tragedyAudienceBase);
+        }
+        return result;
+    }
+
 }

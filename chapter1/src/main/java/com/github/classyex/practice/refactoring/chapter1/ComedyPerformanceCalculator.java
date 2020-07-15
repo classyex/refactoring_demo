@@ -11,4 +11,7 @@ public class ComedyPerformanceCalculator extends PerformanceCalculator {
     public ComedyPerformanceCalculator(RichPerformance aPerformance, Play aPlay) {
         super(aPerformance, aPlay);
     }
+
+
+
 }

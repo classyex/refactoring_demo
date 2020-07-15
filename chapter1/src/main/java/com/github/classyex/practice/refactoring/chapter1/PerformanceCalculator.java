@@ -27,14 +27,7 @@ public class PerformanceCalculator {
 
         switch (play.getType()) {
             case "tragedy":
-                final int tragedyBaseAmount = 40000;
-                result = tragedyBaseAmount;
-                final int tragedyAudienceBase = 30;
-                if (performance.getAudience() > tragedyAudienceBase) {
-                    final int tragedyOverPerAmount = 1000;
-                    result += tragedyOverPerAmount * (performance.getAudience() - tragedyAudienceBase);
-                }
-                break;
+                throw new IllegalArgumentException("bad thing");
             case "comedy":
                 final int comedyBaseAmount = 30000;
                 result = comedyBaseAmount;
