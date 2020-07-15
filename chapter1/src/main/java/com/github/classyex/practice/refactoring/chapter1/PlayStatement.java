@@ -28,8 +28,8 @@ public class PlayStatement {
     private String renderPlainText(final StatementData statementData) {
         String result = String.format("Statement for %s\n", statementData.getCustomer());
 
-        for (Performance perf : statementData.getPerformances()) {
-            result += String.format("  %s: %s (%s seats)\n", statementData.playFor(perf).getName(),
+        for (RichPerformance perf : statementData.getPerformances()) {
+            result += String.format("  %s: %s (%s seats)\n", perf.getPlay().getName(),
                     usd(statementData.amountFor(perf)), perf.getAudience());
         }
 
