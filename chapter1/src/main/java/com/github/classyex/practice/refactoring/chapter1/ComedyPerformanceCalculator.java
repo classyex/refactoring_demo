@@ -8,10 +8,11 @@ package com.github.classyex.practice.refactoring.chapter1;
 */
 
 public class ComedyPerformanceCalculator extends PerformanceCalculator {
+    public static final int BASE_AMOUNT = 30000;
     private RichPerformance performance;
     private Play play;
 
-    public ComedyPerformanceCalculator(RichPerformance aPerformance, Play aPlay) {
+    public ComedyPerformanceCalculator(final RichPerformance aPerformance, final Play aPlay) {
         super(aPerformance, aPlay);
         performance = aPerformance;
         play = aPlay;
@@ -19,7 +20,7 @@ public class ComedyPerformanceCalculator extends PerformanceCalculator {
 
     @Override
     int amountFor() {
-        int result = 30000;
+        int result = BASE_AMOUNT;
         final int comedyAudienceBase = 20;
         if (performance.getAudience() > comedyAudienceBase) {
             final int comedyOverPerAmount = 500;

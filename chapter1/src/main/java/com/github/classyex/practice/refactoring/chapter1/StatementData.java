@@ -40,7 +40,7 @@ public class StatementData {
         return result;
     }
 
-    private PerformanceCalculator createPerformanceCalculator(RichPerformance aPerformance, Play aPlay) {
+    private PerformanceCalculator createPerformanceCalculator(final RichPerformance aPerformance, final Play aPlay) {
         switch (aPlay.getType()) {
             case "tragedy":
                 return new TragedyPerformanceCalculator(aPerformance, aPlay);
