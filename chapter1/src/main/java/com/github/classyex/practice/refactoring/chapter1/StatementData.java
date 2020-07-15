@@ -32,19 +32,11 @@ public class StatementData {
 
 
     int totalAmount() {
-        int result = 0;
-        for (Performance perf : getPerformances()) {
-            result += perf.amountFor();
-        }
-        return result;
+        return getPerformances().stream().map(Performance::amountFor).reduce(0, Integer::sum);
     }
 
     int totalVolumeCredits() {
-        int result = 0;
-        for (Performance perf : getPerformances()) {
-            result += volumeCreditsFor(perf);
-        }
-        return result;
+        return getPerformances().stream().map(this::volumeCreditsFor).reduce(0, Integer::sum);
     }
 
     private int volumeCreditsFor(Performance aPerformance) {
