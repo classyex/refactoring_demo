@@ -24,11 +24,7 @@ public class StatementData {
     }
 
     private Performance enrichPerformance(final Map<String, Play> plays, final Performance aPerformance) {
-        Performance result = new Performance();
-        result.setAudience(aPerformance.getAudience());
-        result.setPlayID(aPerformance.getPlayID());
-        result.setPlays(plays);
-        return result;
+        return new Performance(aPerformance.getPlayID(), aPerformance.getAudience(), plays);
     }
 
     public String getCustomer() {

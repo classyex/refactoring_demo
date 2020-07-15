@@ -18,6 +18,16 @@ public class Performance {
     private Integer audience;
     private Map<String, Play> plays;
 
+    public Performance() {
+
+    }
+
+    public Performance(final String playID, final Integer audience, final Map<String, Play> plays) {
+        this.playID = playID;
+        this.audience = audience;
+        this.plays = plays;
+    }
+
     Play playFor() {
         return this.plays.get(getPlayID());
     }
