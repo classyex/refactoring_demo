@@ -13,7 +13,6 @@ public class Performance {
 
     private String playID;
     private Integer audience;
-    private Map<String, Play> plays;
 
     public Performance() {
     }
@@ -21,7 +20,6 @@ public class Performance {
     public Performance(final String playID, final Integer audience, final Map<String, Play> plays) {
         this.playID = playID;
         this.audience = audience;
-        this.plays = plays;
     }
 
     public String getPlayID() {
@@ -30,10 +28,6 @@ public class Performance {
 
     public Integer getAudience() {
         return audience;
-    }
-
-    Play playFor() {
-        return this.plays.get(getPlayID());
     }
 
 }
