@@ -30,7 +30,7 @@ public class StatementData {
         this.totalVolumeCredits = totalVolumeCredits();
     }
 
-    private RichPerformance enrichPerformance(Performance aPerformance) {
+    private RichPerformance enrichPerformance(final Performance aPerformance) {
         RichPerformance result = new RichPerformance();
         BeanUtils.copyProperties(aPerformance, result);
         return result;
