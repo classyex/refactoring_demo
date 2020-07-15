@@ -60,10 +60,6 @@ public class StatementData {
         return plays.get(aPerformance.getPlayID());
     }
 
-    private int volumeCreditsFor(final RichPerformance aPerformance) {
-        return new PerformanceCalculator(aPerformance, playFor(aPerformance)).volumeCreditsFor();
-    }
-
     int totalAmount() {
         return getPerformances().stream().map(RichPerformance::getAmount).reduce(0, Integer::sum);
     }
