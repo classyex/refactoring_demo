@@ -36,7 +36,7 @@ public class StatementData {
         PerformanceCalculator calculator = new PerformanceCalculator(result, playFor(result));
         result.setPlay(calculator.getPlay());
         result.setAmount(calculator.amountFor());
-        result.setVolumeCredits(volumeCreditsFor(result));
+        result.setVolumeCredits(calculator.volumeCreditsFor());
         return result;
     }
 
