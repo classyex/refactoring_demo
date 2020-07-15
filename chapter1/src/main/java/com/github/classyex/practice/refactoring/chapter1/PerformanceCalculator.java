@@ -12,9 +12,9 @@ public class PerformanceCalculator {
     private Performance performance;
     private Play play;
 
-    public PerformanceCalculator(final Performance aPerformance, final Play play) {
+    public PerformanceCalculator(final Performance aPerformance, final Play aPlay) {
         this.performance = aPerformance;
-        this.play = play;
+        this.play = aPlay;
     }
 
     public Play getPlay() {
