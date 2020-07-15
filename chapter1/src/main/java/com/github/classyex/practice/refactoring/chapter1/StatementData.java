@@ -50,7 +50,7 @@ public class StatementData {
         final int defaultCredits = 0;
         int result = Math.max(aPerformance.getAudience() - creditsBase, defaultCredits);
         // add extra credit for every ten comedy attendees
-        if ("comedy".equals(aPerformance.playFor().getType())) {
+        if ("comedy".equals(playFor(aPerformance).getType())) {
             final float comedyExtraCreditPer = 5.0F;
             result += Math.floor(aPerformance.getAudience() / comedyExtraCreditPer);
         }
@@ -60,7 +60,7 @@ public class StatementData {
     int amountFor(Performance aPerformance) {
         int result = 0;
 
-        switch (aPerformance.playFor().getType()) {
+        switch (playFor(aPerformance).getType()) {
             case "tragedy":
                 final int tragedyBaseAmount = 40000;
                 result = tragedyBaseAmount;
@@ -84,7 +84,7 @@ public class StatementData {
                 result += comedyFactory * aPerformance.getAudience();
                 break;
             default:
-                throw new IllegalArgumentException(String.format("unknown type: %s", aPerformance.playFor().getType()));
+                throw new IllegalArgumentException(String.format("unknown type: %s", playFor(aPerformance).getType()));
         }
         return result;
     }
