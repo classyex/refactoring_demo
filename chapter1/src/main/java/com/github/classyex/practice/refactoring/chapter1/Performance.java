@@ -36,35 +36,4 @@ public class Performance {
         return this.plays.get(getPlayID());
     }
 
-    int amountFor() {
-        int result = 0;
-
-        switch (playFor().getType()) {
-            case "tragedy":
-                final int tragedyBaseAmount = 40000;
-                result = tragedyBaseAmount;
-                final int tragedyAudienceBase = 30;
-                if (getAudience() > tragedyAudienceBase) {
-                    final int tragedyOverPerAmount = 1000;
-                    result += tragedyOverPerAmount * (getAudience() - tragedyAudienceBase);
-                }
-                break;
-            case "comedy":
-                final int comedyBaseAmount = 30000;
-                result = comedyBaseAmount;
-                final int comedyAudienceBase = 20;
-                if (getAudience() > comedyAudienceBase) {
-                    final int comedyOverPerAmount = 500;
-                    final int comedyOverBaseAmount = 10000;
-                    result += comedyOverBaseAmount + comedyOverPerAmount * (
-                            getAudience() - comedyAudienceBase);
-                }
-                final int comedyFactory = 300;
-                result += comedyFactory * getAudience();
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("unknown type: %s", playFor().getType()));
-        }
-        return result;
-    }
 }
