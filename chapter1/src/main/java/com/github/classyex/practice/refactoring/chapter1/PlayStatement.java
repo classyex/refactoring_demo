@@ -39,11 +39,30 @@ public class PlayStatement {
         return result;
     }
 
+    public String htmlStatement() {
+        return renderHtml(new StatementData(invoice, plays));
+    }
+
+    private String renderHtml(StatementData statementData) {
+        String result = String.format("<h1>Statement for %s</h1>\n", statementData.getCustomer());
+        result += "<table>\n";
+        result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>\n";
+        for (Performance perf : statementData.getPerformances()) {
+            result += String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>\n",
+                    perf.playFor().getName(), perf.getAudience(), usd(perf.amountFor()));
+        }
+        result += "</table>\n";
+        result += String.format("<p>Amount owed is <em>%s</em></p>\n", usd(statementData.totalAmount()));
+        result += String.format("<p>You earned <em>%s</em> credits</p>\n", statementData.totalVolumeCredits());
+        return result;
+    }
+
     private String usd(int aNumber) {
         final int formatNum = 100;
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
         format.setMinimumFractionDigits(2);
         return format.format(aNumber / formatNum);
     }
+
 
 }

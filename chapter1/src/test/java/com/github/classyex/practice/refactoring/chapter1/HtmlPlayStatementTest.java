@@ -24,7 +24,7 @@ public class HtmlPlayStatementTest {
         List<Invoice> invoicesList = objectMapper.readValue(invoicesStr, new TypeReference<List<Invoice>>() {
         });
         PlayStatement statement = new PlayStatement(playMap, invoicesList.get(0));
-        String expectation = "<h1>Statement for BigCo<h1>\n" +
+        String expectation = "<h1>Statement for BigCo</h1>\n" +
                 "<table>\n" +
                 "<tr><th>play</th><th>seats</th><th>cost</th></tr>\n" +
                 "<tr><td>Hamlet</td><td>55</td><td>$650.00</td></tr>\n" +
@@ -33,7 +33,7 @@ public class HtmlPlayStatementTest {
                 "</table>\n" +
                 "<p>Amount owed is <em>$1,730.00</em></p>\n" +
                 "<p>You earned <em>47</em> credits</p>\n";
-        assertThat(statement.statement(), is(equalTo(expectation)));
+        assertThat(statement.htmlStatement(), is(equalTo(expectation)));
     }
 
 
