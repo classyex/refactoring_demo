@@ -33,7 +33,7 @@ public class StatementData {
     private RichPerformance enrichPerformance(final Performance aPerformance) {
         RichPerformance result = new RichPerformance();
         BeanUtils.copyProperties(aPerformance, result);
-        PerformanceCalculator calculator = new PerformanceCalculator(aPerformance, playFor(result));
+        PerformanceCalculator calculator = new PerformanceCalculator(result, playFor(result));
         result.setPlay(calculator.getPlay());
         result.setAmount(amountFor(result));
         result.setVolumeCredits(volumeCreditsFor(result));

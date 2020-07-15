@@ -9,10 +9,10 @@ package com.github.classyex.practice.refactoring.chapter1;
 
 public class PerformanceCalculator {
 
-    private Performance performance;
+    private RichPerformance performance;
     private Play play;
 
-    public PerformanceCalculator(final Performance aPerformance, final Play aPlay) {
+    public PerformanceCalculator(final RichPerformance aPerformance, final Play aPlay) {
         this.performance = aPerformance;
         this.play = aPlay;
     }
@@ -20,4 +20,6 @@ public class PerformanceCalculator {
     public Play getPlay() {
         return play;
     }
+
+
 }
