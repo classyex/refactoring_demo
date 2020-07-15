@@ -1,7 +1,5 @@
 package com.github.classyex.practice.refactoring.chapter1;
 
-import lombok.Data;
-
 import java.util.Map;
 
 /**
@@ -11,7 +9,6 @@ import java.util.Map;
 * @author yex <br>
 */
 
-@Data
 public class Performance {
 
     private String playID;
@@ -19,7 +16,6 @@ public class Performance {
     private Map<String, Play> plays;
 
     public Performance() {
-
     }
 
     public Performance(final String playID, final Integer audience, final Map<String, Play> plays) {
@@ -28,12 +24,16 @@ public class Performance {
         this.plays = plays;
     }
 
-    Play playFor() {
-        return this.plays.get(getPlayID());
+    public String getPlayID() {
+        return playID;
     }
 
-    public void setPlays(final Map<String, Play> plays) {
-        this.plays = plays;
+    public Integer getAudience() {
+        return audience;
+    }
+
+    Play playFor() {
+        return this.plays.get(getPlayID());
     }
 
     int amountFor() {
