@@ -15,7 +15,6 @@ public class PlayStatement {
 
     private final Map<String, Play> plays;
     private final Invoice invoice;
-    private StatementData statementData;
 
     public PlayStatement(final Map<String, Play> plays, final Invoice invoice) {
         this.plays = plays;
