@@ -1,3 +1,5 @@
 rootProject.name = 'refactoring'
 
 include("chapter1")
+include('chapter4')
+
